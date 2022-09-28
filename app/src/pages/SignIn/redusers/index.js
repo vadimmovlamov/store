@@ -1,6 +1,15 @@
+import { createSlice } from "@reduxjs/toolkit";
+
 const initialState = {
-  isLoading: false,
-  error: null,
-  userInfo: {}, // что мы передаем в userInfo???
-  accessToken: {},
+  id: null,
+  token: null,
+  email: null,
 };
+
+const authSlice = createSlice({
+  name: "auth",
+  initialState,
+  extraReducers: {},
+});
+
+export default authSlice.reducer;
