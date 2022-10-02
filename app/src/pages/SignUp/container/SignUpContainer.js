@@ -1,25 +1,29 @@
 import { useForm } from "../../../hooks/useForm";
 import { useFetching } from "../../../hooks/useFetching";
-import { startCase } from "lodash";
 import { signUp } from "../api/config";
 import { useCallback, useEffect } from "react";
 import { ROUTE_NAMES } from "../../../router/routeNames";
 import { useNavigate } from "react-router-dom";
-import styles from "./styles.scss";
+import SignUp from "../components";
+import { startCase } from "lodash";
 
 const SignUpContainer = () => {
   const [formValues, handleFormChange, handleReset] = useForm({
     firstName: "",
     lastName: "",
-    gender: "",
     email: "",
-    phoneNumber: "+375__",
-    address: "",
-    city: "",
-    goods: "",
-    comments: "",
+    gender: {},
+    phoneNumber: "",
     password: "",
+    // showPassword: false,
   });
+
+  // const handleClickShowPassword = () => {
+  //   setValues({
+  //     ...formValues,
+  //     showPassword: !formValues.showPassword,
+  //   });
+  // };
 
   const { data, isLoading, error, handleDataLoad } = useFetching(
     signUp,
@@ -49,27 +53,15 @@ const SignUpContainer = () => {
 
   return (
     <div>
-      <h1 className={styles.head}>Registration form</h1>
-
-      <form onSubmit={handleSubmit} className={styles.wrapper}>
-        {Object.entries(formValues).map(([fieldName, value]) => {
-          return (
-            <input
-              key={fieldName}
-              type="text"
-              placeholder={startCase(fieldName)}
-              name={fieldName}
-              value={value}
-              onChange={handleFormChange}
-            />
-          );
-        })}
-
-        <button role="submit">Create Account</button>
-
-        <p style={{ color: "green" }}>{data?.data?.message}</p>
-        <p style={{ color: "red" }}>{error?.message}</p>
-      </form>
+      <SignUp
+        data={data}
+        error={error}
+        startCase={startCase}
+        formValues={formValues}
+        handleSubmit={handleSubmit}
+        handleFormChange={handleFormChange}
+        handleFormReset={handleReset}
+      />
     </div>
   );
 };
