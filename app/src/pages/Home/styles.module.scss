@@ -1,0 +1,36 @@
+.wrapper {
+}
+
+.wrapper_content {
+  max-width: 1170px;
+  margin: 0 auto;
+}
+
+.lang {
+  padding: 0;
+}
+
+.header_up {
+  display: flex;
+  color: white;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #7AC751;
+  height: 50px;
+  padding: 0 20px;
+}
+
+.header_up_right {
+  width: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header {
+  background-color: white;
+}
+
+.menu {
+
+}

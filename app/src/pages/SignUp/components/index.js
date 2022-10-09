@@ -1,63 +1,164 @@
 import { Link } from "react-router-dom";
+import { useState } from "react";
 import { ROUTE_NAMES } from "../../../router/routeNames";
-import { Box, Button, TextField } from "@mui/material";
+
+import { Button, TextField } from "@mui/material";
 import LoginOutlinedIcon from "@mui/icons-material/LoginOutlined";
 import HowToRegOutlinedIcon from "@mui/icons-material/HowToRegOutlined";
-import ControlledRadioButtonsGroup from "../../../components/Gender";
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import HomeIcon from "@mui/icons-material/Home";
+import RadioGroup from "@mui/material/RadioGroup";
 
 import styles from "./styles.module.scss";
-import HomeIcon from "@mui/icons-material/Home";
 
 const SignUp = ({
-  data,
-  error,
-  formValues,
-  handleFormChange,
+  values,
+  handleChange,
   handleSubmit,
-  startCase,
+  errors,
+  touched,
+  handleBlur,
 }) => {
+  const [isPasswordVisible, setVisible] = useState(false);
+  const [isConfirmPasswordVisible, setConfirmVisible] = useState(false);
+
   return (
     <div className={styles.wrapper}>
       <Link to={ROUTE_NAMES.HOME}>
         <Button startIcon={<HomeIcon />}></Button>
       </Link>
-      <h1 className={styles.head}>Registration form</h1>
+
       <div>
         <form onSubmit={handleSubmit} className={styles.form}>
-          {Object.entries(formValues).map(([fieldName, value]) => {
-            return (
-              <Box
-                component="form"
-                sx={{
-                  "& > :not(style)": { m: 1, width: "25ch" },
-                }}
-                noValidate
-                autoComplete="off"
-              >
-                <TextField
-                  // className={styles.input}
-                  key={fieldName}
-                  type="text"
-                  placeholder={startCase(fieldName)}
-                  label={startCase(fieldName)}
-                  name={fieldName}
-                  value={value}
-                  onChange={handleFormChange}
-                />
-              </Box>
-            );
-          })}
+          <h1 className={styles.head}>Registration form</h1>
 
-          <div className={styles.gender}>
-            <ControlledRadioButtonsGroup />
-          </div>
+          {/*1. First name*/}
+          <label>
+            <TextField
+              className={styles.textfield}
+              type={"text"}
+              name={"firstName"}
+              value={values.firstName}
+              onChange={handleChange}
+              placeholder={"Enter first name"}
+            />
+            {touched.firstName && errors.firstName && (
+              <p className={styles.err}>{errors.firstName}</p>
+            )}
+          </label>
 
-          <button role="submit" className={styles.button}>
-            Create Account
-          </button>
+          {/*2. Second name*/}
+          <label>
+            <TextField
+              className={styles.textfield}
+              type={"text"}
+              name={"lastName"}
+              value={values.lastName}
+              onChange={handleChange}
+              placeholder={"Enter second name"}
+            />
+            {touched.lastName && errors.lastName && (
+              <p className={styles.err}>{errors.lastName}</p>
+            )}
+          </label>
+
+          {/*3. Gender*/}
+          <select
+            className={styles.select}
+            value={values.gender}
+            onChange={handleChange}
+            name={"gender"}
+            placeholder={"sex"}
+          >
+            <option hidden selected>
+              Sex
+            </option>
+            <option value={"male"}>Male</option>
+            <option value={"female"}>Female</option>
+          </select>
+
+          {/*4. Phone Number*/}
+          <label>
+            <TextField
+              className={styles.textfield}
+              type={"phone"}
+              name={"phone"}
+              value={values.phone}
+              onChange={handleChange}
+              placeholder={"Enter phone number"}
+              onBlur={handleBlur}
+            />
+            {touched.phone && errors.phone && (
+              <p className={styles.err}>{errors.phone}</p>
+            )}
+          </label>
+
+          {/*5. e-mail*/}
+          <label>
+            <TextField
+              className={styles.textfield}
+              type={"email"}
+              name={"email"}
+              value={values.email}
+              onChange={handleChange}
+              placeholder={"Enter e-mail"}
+              onBlur={handleBlur}
+            />
+            {touched.email && errors.email && (
+              <p className={styles.err}>{errors.email}</p>
+            )}
+          </label>
+
+          {/*6. Password*/}
+          <label>
+            {touched.password && errors.password && (
+              <p className={styles.err}>{errors.password}</p>
+            )}
+            <TextField
+              className={styles.textfield}
+              type={isPasswordVisible ? "text" : "password"}
+              name={"password"}
+              value={values.password}
+              onChange={handleChange}
+              placeholder={"Enter password"}
+              onBlur={handleBlur}
+            />
+          </label>
+
+          <RadioGroup onClick={() => setVisible(!isPasswordVisible)}>
+            <p>
+              <VisibilityIcon />
+              Show password
+            </p>
+          </RadioGroup>
+
+          {/*7. Confirm Password*/}
+          <label>
+            {touched.confirmPassword && errors.confirmPassword && (
+              <p className={styles.err}>{errors.confirmPassword}</p>
+            )}
+
+            <TextField
+              className={styles.textfield}
+              type={isConfirmPasswordVisible ? "text" : "password"}
+              name={"confirmPassword"}
+              value={values.confirmPassword}
+              onChange={handleChange}
+              placeholder={"Confirm password"}
+              onBlur={handleBlur}
+            />
+          </label>
+          <RadioGroup
+            onClick={() => setConfirmVisible(!isConfirmPasswordVisible)}
+          >
+            <p>
+              <VisibilityIcon />
+              Show confirm password
+            </p>
+          </RadioGroup>
 
           <Button
-            role="submit"
+            type="submit"
             endIcon={<HowToRegOutlinedIcon />}
             style={{
               backgroundColor: "rgba(122, 199, 81, 1)",
@@ -90,8 +191,8 @@ const SignUp = ({
           </Button>
 
           <div style={{ margin: 10 }}>
-            <p style={{ color: "green" }}>{data?.data?.message}</p>
-            <p style={{ color: "red" }}>{error?.message}</p>
+            <p style={{ color: "green" }}>{values?.values?.message}</p>
+            <p style={{ color: "red" }}>{values?.message}</p>
           </div>
         </form>
       </div>

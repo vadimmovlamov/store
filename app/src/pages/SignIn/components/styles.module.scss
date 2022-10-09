@@ -1,0 +1,94 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Serif:ital,opsz,wght@0,8..144,400;0,8..144,600;0,8..144,700;1,8..144,400;1,8..144,500;1,8..144,700&display=swap');
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin: 0 auto;
+}
+
+.head {
+  font-size: 30px;
+  font-weight: bold;
+  line-height: 1.2;
+  margin: 50px 0 30px 0;
+  color: #555555;
+  text-transform: capitalize;
+}
+
+.form {
+  background: #F7F8FA;
+  width: 400px;
+  border: 3px solid rgba(122, 199, 81, 1);
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 15px 15px 20px #ccc;
+  margin-top: 80px;
+}
+
+
+.input {
+  width: 45%;
+  height: 35px;
+  margin: 5px;
+  padding: 5px 7px;
+  border: 1px solid rgba(204, 204, 204, 1);
+  border-radius: 5px;
+}
+
+.input:first-child {
+  margin-top: 20px;
+}
+
+.input::placeholder {
+  color: rgba(85, 85, 85, 0.4);
+}
+
+.button {
+  background-color: rgba(122, 199, 81, 1);
+  color: #ffffff;
+  font-size: 18px;
+  padding: 10px 15px;
+  border-radius: 10px;
+  margin: 20px 0 20px 0;
+  text-transform: capitalize;
+}
+
+.button:active {
+  font-weight: bold;
+}
+
+.button:hover {
+  background-color: rgb(153, 224, 118);
+}
+
+.button:focus {
+  background-color: rgba(122, 199, 81, 1);
+}
+
+.gender {
+  color: #555555;
+}
+
+.linktext {
+  color: rgb(85, 85, 100);
+  text-transform: capitalize;
+}
+
+.bigButton {
+  color: rgb(85, 85, 100);
+  font-size: 10px;
+  margin-top: 5px;
+  margin-bottom: 10px;
+  border-radius: 10px;
+}
+
+.err {
+  color: red;
+  margin: 5px 10px;
+}
