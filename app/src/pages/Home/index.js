@@ -4,6 +4,7 @@ import BasicSelect from "../../components/Header/changeLang";
 import { ROUTE_NAMES } from "../../router/routeNames";
 import { Link } from "react-router-dom";
 import PrimarySearchAppBar from "../../components/Header/menuHeader";
+import { Button } from "@mui/material";
 
 const Home = () => {
   return (
@@ -31,6 +32,10 @@ const Home = () => {
           <PrimarySearchAppBar />
         </div>
         <div className={styles.menu}></div>
+
+        <Button>
+          <Link to={ROUTE_NAMES.SHOP_BOX}>Shop Box</Link>
+        </Button>
       </div>
     </div>
   );

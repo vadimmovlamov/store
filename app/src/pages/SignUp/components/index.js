@@ -18,6 +18,8 @@ const SignUp = ({
   errors,
   touched,
   handleBlur,
+  data,
+  error,
 }) => {
   const [isPasswordVisible, setVisible] = useState(false);
   const [isConfirmPasswordVisible, setConfirmVisible] = useState(false);

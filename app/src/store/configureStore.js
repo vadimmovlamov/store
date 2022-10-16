@@ -1,8 +1,13 @@
+import { rootReducer } from "./rootReducer";
 import { configureStore } from "@reduxjs/toolkit";
-import authSlice from "../pages/SignIn/redusers";
 
 export const store = configureStore({
-  reducer: {
-    auth: authSlice,
-  },
+  reducer: rootReducer,
+  devTools: process.env.NODE_ENV !== "production",
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: {
+        ignoredActions: ["persist/PERSIST"],
+      },
+    }),
 });

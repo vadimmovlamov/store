@@ -14,6 +14,7 @@ const SignIn = ({
   values,
   handleChange,
   handleSubmit,
+  handleToSignUp,
   errors,
   touched,
   handleBlur,
@@ -26,7 +27,7 @@ const SignIn = ({
       </Link>
 
       <form onSubmit={handleSubmit} className={styles.form}>
-        <h1 className={styles.head}>login in your account</h1>
+        <h1 className={styles.head}>log in your account</h1>
 
         <label>
           <TextField
@@ -65,6 +66,7 @@ const SignIn = ({
 
         <Button
           type="submit"
+          onClick={handleToSignUp}
           // className={styles.button}
           endIcon={<PersonAddAltOutlinedIcon />}
           style={{
@@ -79,7 +81,7 @@ const SignIn = ({
             paddingRight: 20,
           }}
         >
-          login in
+          log in
         </Button>
         <Button endIcon={<CreateOutlinedIcon />} className={styles.bigButton}>
           <Link to={ROUTE_NAMES.SIGN_UP} className={styles.linktext}>

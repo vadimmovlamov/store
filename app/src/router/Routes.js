@@ -15,8 +15,11 @@ const Router = () => {
       <Route path={ROUTE_NAMES.SIGN_IN} element={<SignInContainer />} />
       <Route path={ROUTE_NAMES.SIGN_UP} element={<SignUpContainer />} />
       <Route path={ROUTE_NAMES.USERS} element={<UsersContainer />} />
-      <Route path={ROUTE_NAMES.GOODS} element={<GoodsContainer />} />
       <Route path={ROUTE_NAMES.SHOP_BOX} element={<BoxContainer />} />
+      {/*<Route element={<PrivateRoutes />}>*/}
+      {/*  <Route path={ROUTE_NAMES.SHOP_BOX} element={<BoxContainer />} />*/}
+      {/*</Route>*/}
+      <Route path={ROUTE_NAMES.GOODS} element={<GoodsContainer />} />
     </Routes>
   );
 };

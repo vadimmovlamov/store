@@ -3,6 +3,6 @@ export const ROUTE_NAMES = {
   SIGN_IN: "/sign-in",
   SIGN_UP: "/sign-up",
   USERS: "/user",
-  SHOP_BOX: "/shop-box",
+  SHOP_BOX: "/shop-box/pokemons",
   GOODS: "/products",
 };
