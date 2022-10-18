@@ -9,17 +9,17 @@ const initialState = {
 
 export const loadPokemons = createAsyncThunk(
   "pokemons/fetchAll",
+
   async (page) => {
     const response = await getPokemons({ page });
-
     return response.data;
   }
 );
 
 const pokemonsSlice = createSlice({
   name: "pokemons",
-  initialState,
   reducers: {},
+  initialState,
   extraReducers: (builder) => {
     builder.addCase(loadPokemons.pending, (state) => {
       state.isLoading = true;

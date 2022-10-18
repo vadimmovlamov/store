@@ -1,42 +1,58 @@
-import { useCallback, useEffect } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 import { isPokemonSelector } from "../../../selectors";
-import { loadPokemons } from "../redusers";
 import { ROUTE_NAMES } from "../../../router/routeNames";
-import Layout from "../../../components/Layouts/shop";
-import { usePagination } from "../../../hooks/usePagination";
+import { loadPokemons } from "../redusers";
+import PokemonCard from "../components";
+import { usePagination } from "../../../hooks";
+import { Pagination } from "@mui/material";
+import Spinner from "../../../components/Spinner";
 
 const BoxContainer = () => {
   const dispatch = useDispatch();
+
   const navigate = useNavigate();
-  const pokemons = useSelector(isPokemonSelector);
+
   const [page, handlePageChange] = usePagination(1);
 
-  const handleNavigateToPokemonDetail = useCallback(
-    (pokemonId) => {
-      navigate(`${ROUTE_NAMES.SHOP_BOX}/${pokemonId}`);
-    },
-    [navigate]
-  );
+  const { pokemons, isLoading } = useSelector(isPokemonSelector);
 
-  useEffect(
-    (page) => {
-      dispatch(loadPokemons(page));
-    },
-    [dispatch, page]
-  );
+  useEffect(() => {
+    dispatch(loadPokemons(page));
+  }, [page]);
+
+  const handleNavigateToPokemonDetail = (pokemonId) => {
+    navigate(`${ROUTE_NAMES.SHOP_BOX}/${pokemonId}`);
+  };
 
   return (
-    <Layout
-      page={page}
-      error={pokemons.error}
-      pokemons={pokemons.data}
-      onPageChange={handlePageChange}
-      isLoading={pokemons.isLoading}
-      onNavigateToPokemonDetail={handleNavigateToPokemonDetail}
-    />
+    <div>
+      <h1>Store pokemons</h1>
+      <div>
+        {isLoading ? (
+          <Spinner />
+        ) : (
+          pokemons.map((pokemon) => (
+            <PokemonCard
+              key={pokemon.id}
+              name={pokemon.name}
+              image={pokemon.image}
+              handleClick={() => handleNavigateToPokemonDetail(pokemon.id)}
+            />
+          ))
+        )}
+      </div>
+
+      <div>
+        <Pagination
+          isDisabled={isLoading}
+          currentPage={page}
+          handlePageChange={handlePageChange}
+        />
+      </div>
+    </div>
   );
 };
 
