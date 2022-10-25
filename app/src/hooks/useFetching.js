@@ -6,32 +6,30 @@ export const useFetching = (
   isLoadOnMount = true
 ) => {
   const [data, setData] = useState(initialValue);
-  const [isLoading, setLoading] = useState(false); //сразу состояние загрузки не идет
-  const [error, setError] = useState(null); // по умолчанию у нас ошибок нет
+  const [isLoading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
-  const handleDataLoad = useCallback(async (data) => {
-    setLoading(true);
-    try {
-      const response = await asyncCallback(data);
+  const handleDataLoad = useCallback(
+    async (data) => {
+      setLoading(true);
+      try {
+        const response = await asyncCallback(data);
 
-      setData(response);
-    } catch (error) {
-      setError(error);
-    } finally {
-      setLoading(false);
-    }
-  }, []);
+        setData(response);
+      } catch (error) {
+        setError(error);
+      } finally {
+        setLoading(false);
+      }
+    },
+    [asyncCallback]
+  );
 
   useEffect(() => {
     if (isLoadOnMount) {
       handleDataLoad();
     }
-  }, [handleDataLoad]);
+  }, [isLoadOnMount, handleDataLoad]);
 
-  return {
-    data,
-    isLoading,
-    error,
-    handleDataLoad,
-  };
+  return { data, isLoading, error, handleDataLoad };
 };

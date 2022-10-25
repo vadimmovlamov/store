@@ -1,19 +1,20 @@
 import axios from "axios";
-import { LOCAL_STORAGE_KEYS } from "../constants/localStorage";
 
-export const BASE_URL = "http://localhost:3000";
-// export const BASE_URL = "https://pokeapi.co/api/v2";
-// export const BASE_URL = "https://poke-store-api.herokuapp.com";
+import { BASE_URL, LOCAL_STORAGE_KEYS } from "../constans";
 
-const apiConfig = {
+export const apiConfig = {
   baseURL: BASE_URL,
 };
 
 const api = axios.create(apiConfig);
 
 api.interceptors.request.use((axiosConfig) => {
-  const accessToken = localStorage.getItem(LOCAL_STORAGE_KEYS.ACCES_TOKEN);
-  axiosConfig.headers.Authorization = `Bearer ${accessToken}`;
+  const accessToken = localStorage.getItem(LOCAL_STORAGE_KEYS.ACCESS_TOKEN);
+
+  if (accessToken) {
+    axiosConfig.headers.Authorization = `Bearer ${accessToken}`;
+  }
+
   return axiosConfig;
 });
 

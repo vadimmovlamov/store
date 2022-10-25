@@ -1,201 +1,190 @@
-import { Link } from "react-router-dom";
 import { useState } from "react";
-import { ROUTE_NAMES } from "../../../router/routeNames";
 
-import { Button, TextField } from "@mui/material";
-import LoginOutlinedIcon from "@mui/icons-material/LoginOutlined";
-import HowToRegOutlinedIcon from "@mui/icons-material/HowToRegOutlined";
-import VisibilityIcon from "@mui/icons-material/Visibility";
-import HomeIcon from "@mui/icons-material/Home";
-import RadioGroup from "@mui/material/RadioGroup";
+import startCase from "lodash/startCase";
+
+import TextField from "@mui/material/TextField";
+import IconButton from "@mui/material/IconButton";
+import Input from "@mui/material/Input";
+import InputLabel from "@mui/material/InputLabel";
+import InputAdornment from "@mui/material/InputAdornment";
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
+import MenuItem from "@mui/material/MenuItem";
+import Tooltip from "@mui/material/Tooltip";
+import Visibility from "@mui/icons-material/Visibility";
+import VisibilityOff from "@mui/icons-material/VisibilityOff";
+import Snackbar from "@mui/material/Snackbar";
+import Alert from "@mui/material/Alert";
+import gifik from "../../../static/img/gifik.gif";
+
+import { hintTexts } from "../constans";
 
 import styles from "./styles.module.scss";
 
 const SignUp = ({
-  values,
-  handleChange,
-  handleSubmit,
-  errors,
-  touched,
-  handleBlur,
+  formik,
   data,
   error,
+  errors,
+  touched,
+  valuePassword,
+  onClickShowPassword,
 }) => {
-  const [isPasswordVisible, setVisible] = useState(false);
-  const [isConfirmPasswordVisible, setConfirmVisible] = useState(false);
+  const [open, setOpen] = useState(true);
+  const handleClose = () => setOpen(false);
 
   return (
-    <div className={styles.wrapper}>
-      <Link to={ROUTE_NAMES.HOME}>
-        <Button startIcon={<HomeIcon />}></Button>
-      </Link>
-
-      <div>
-        <form onSubmit={handleSubmit} className={styles.form}>
-          <h1 className={styles.head}>Registration form</h1>
-
-          {/*1. First name*/}
-          <label>
+    <div>
+      <div className={styles.wrapper}>
+        <div>
+          <img src={gifik} style={{ borderRadius: "50%", marginTop: 30 }} />
+        </div>
+        <form onSubmit={formik.handleSubmit} className={styles.form}>
+          <TextField
+            id="firstName"
+            name="firstName"
+            type="firstName"
+            variant="standard"
+            errors={formik.errors.firstName}
+            value={formik.values.firstName}
+            color={errors ? "error" : "success"}
+            label={
+              errors && touched
+                ? `${startCase("firstName")}: ${errors}`
+                : startCase("firstName")
+            }
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            touched={formik.touched.firstName}
+            className={styles.input}
+          />
+          <TextField
+            id="lastName"
+            name="lastName"
+            type="lastName"
+            variant="standard"
+            errors={formik.errors.lastName}
+            value={formik.values.lastName}
+            color={errors ? "error" : "success"}
+            label={
+              errors && touched
+                ? `${startCase("lastName")}: ${errors}`
+                : startCase("lastName")
+            }
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            touched={formik.touched.lastName}
+            className={styles.input}
+          />
+          <Tooltip title={hintTexts.phone} placement="bottom-start">
             <TextField
-              className={styles.textfield}
-              type={"text"}
-              name={"firstName"}
-              value={values.firstName}
-              onChange={handleChange}
-              placeholder={"Enter first name"}
+              id="phone"
+              name="phone"
+              type="phone"
+              variant="standard"
+              errors={formik.errors.phone}
+              value={formik.values.phone}
+              color={errors ? "error" : "success"}
+              label={
+                errors && touched
+                  ? `${startCase("phone")}: ${errors}`
+                  : startCase("phone")
+              }
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              touched={formik.touched.phone}
+              className={styles.input}
             />
-            {touched.firstName && errors.firstName && (
-              <p className={styles.err}>{errors.firstName}</p>
-            )}
-          </label>
-
-          {/*2. Second name*/}
-          <label>
-            <TextField
-              className={styles.textfield}
-              type={"text"}
-              name={"lastName"}
-              value={values.lastName}
-              onChange={handleChange}
-              placeholder={"Enter second name"}
-            />
-            {touched.lastName && errors.lastName && (
-              <p className={styles.err}>{errors.lastName}</p>
-            )}
-          </label>
-
-          {/*3. Gender*/}
-          <select
-            className={styles.select}
-            value={values.gender}
-            onChange={handleChange}
-            name={"gender"}
-            placeholder={"sex"}
-          >
-            <option hidden selected>
-              Sex
-            </option>
-            <option value={"male"}>Male</option>
-            <option value={"female"}>Female</option>
-          </select>
-
-          {/*4. Phone Number*/}
-          <label>
-            <TextField
-              className={styles.textfield}
-              type={"phone"}
-              name={"phone"}
-              value={values.phone}
-              onChange={handleChange}
-              placeholder={"Enter phone number"}
-              onBlur={handleBlur}
-            />
-            {touched.phone && errors.phone && (
-              <p className={styles.err}>{errors.phone}</p>
-            )}
-          </label>
-
-          {/*5. e-mail*/}
-          <label>
-            <TextField
-              className={styles.textfield}
-              type={"email"}
-              name={"email"}
-              value={values.email}
-              onChange={handleChange}
-              placeholder={"Enter e-mail"}
-              onBlur={handleBlur}
-            />
-            {touched.email && errors.email && (
-              <p className={styles.err}>{errors.email}</p>
-            )}
-          </label>
-
-          {/*6. Password*/}
-          <label>
-            {touched.password && errors.password && (
-              <p className={styles.err}>{errors.password}</p>
-            )}
-            <TextField
-              className={styles.textfield}
-              type={isPasswordVisible ? "text" : "password"}
-              name={"password"}
-              value={values.password}
-              onChange={handleChange}
-              placeholder={"Enter password"}
-              onBlur={handleBlur}
-            />
-          </label>
-
-          <RadioGroup onClick={() => setVisible(!isPasswordVisible)}>
-            <p>
-              <VisibilityIcon />
-              Show password
-            </p>
-          </RadioGroup>
-
-          {/*7. Confirm Password*/}
-          <label>
-            {touched.confirmPassword && errors.confirmPassword && (
-              <p className={styles.err}>{errors.confirmPassword}</p>
-            )}
-
-            <TextField
-              className={styles.textfield}
-              type={isConfirmPasswordVisible ? "text" : "password"}
-              name={"confirmPassword"}
-              value={values.confirmPassword}
-              onChange={handleChange}
-              placeholder={"Confirm password"}
-              onBlur={handleBlur}
-            />
-          </label>
-          <RadioGroup
-            onClick={() => setConfirmVisible(!isConfirmPasswordVisible)}
-          >
-            <p>
-              <VisibilityIcon />
-              Show confirm password
-            </p>
-          </RadioGroup>
-
-          <Button
-            type="submit"
-            endIcon={<HowToRegOutlinedIcon />}
-            style={{
-              backgroundColor: "rgba(122, 199, 81, 1)",
-              color: "white",
-              fontSize: 18,
-              borderRadius: 10,
-              textTransform: "capitalize",
-            }}
-          >
-            Create Account
-          </Button>
-
-          <Button
-            onClick={handleSubmit}
-            role="submit"
-            endIcon={<LoginOutlinedIcon />}
-            style={{
-              textTransform: "capitalize",
-              color: "rgb(85, 85, 100)",
-              fontSize: 10,
-              marginTop: 5,
-            }}
-          >
-            <Link
-              to={ROUTE_NAMES.SIGN_IN}
-              style={{ color: "rgb(85, 85, 100)" }}
+          </Tooltip>
+          <FormControl variant="standard">
+            <InputLabel id="gender-label" color={errors ? "error" : "success"}>
+              {errors ? errors : "Gender"}
+            </InputLabel>
+            <Select
+              labelId="gender-label"
+              id="gender"
+              name="gender"
+              errors={formik.errors.gender}
+              value={formik.values.gender}
+              onChange={formik.handleChange}
+              color={errors && touched ? "error" : "success"}
+              onBlur={formik.handleBlur}
+              touched={formik.touched.gender}
+              className={styles.input}
             >
-              Do you already have an account? Entrance
-            </Link>
-          </Button>
+              <MenuItem value={"male"}>Male</MenuItem>
+              <MenuItem value={"female"}>Female</MenuItem>
+            </Select>
+          </FormControl>
+          <TextField
+            id="email"
+            name="email"
+            type="email"
+            variant="standard"
+            value={formik.values.email}
+            errors={formik.errors.email}
+            color={errors ? "error" : "success"}
+            label={
+              errors && touched
+                ? `${startCase("email")}: ${errors}`
+                : startCase("email")
+            }
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            touched={formik.touched.email}
+            className={styles.input}
+          />
+          <Tooltip title={hintTexts.password} placement="bottom-start">
+            <FormControl variant="standard">
+              <InputLabel color={errors ? "error" : "success"}>
+                {errors && touched ? `Password: ${errors}` : "Password"}
+              </InputLabel>
+              <Input
+                id="password"
+                name="password"
+                autoComplete="off"
+                value={formik.values.password}
+                errors={formik.errors.password}
+                type={valuePassword.showPassword ? "text" : "password"}
+                color={errors ? "error" : "success"}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                touched={formik.touched.password}
+                className={styles.input}
+                endAdornment={
+                  <InputAdornment position="end">
+                    <IconButton onClick={onClickShowPassword}>
+                      {valuePassword.showPassword ? (
+                        <VisibilityOff />
+                      ) : (
+                        <Visibility />
+                      )}
+                    </IconButton>
+                  </InputAdornment>
+                }
+              />
+            </FormControl>
+          </Tooltip>
 
-          <div style={{ margin: 10 }}>
-            <p style={{ color: "green" }}>{values?.values?.message}</p>
-            <p style={{ color: "red" }}>{values?.message}</p>
-          </div>
+          <button className={styles.button} type="submit">
+            Create Account
+          </button>
+
+          {data?.data.message && (
+            <Snackbar open={open} autoHideDuration={5000} onClose={handleClose}>
+              <Alert onClose={handleClose} severity="success">
+                {data.data.message}
+              </Alert>
+            </Snackbar>
+          )}
+
+          {error?.response.data.message && (
+            <Snackbar open={open} autoHideDuration={5000} onClose={handleClose}>
+              <Alert onClose={handleClose} severity="error">
+                {error?.response.data.message}
+              </Alert>
+            </Snackbar>
+          )}
         </form>
       </div>
     </div>

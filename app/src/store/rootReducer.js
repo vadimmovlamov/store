@@ -1,9 +1,10 @@
-import { persistReducer } from "redux-persist";
-import storage from "redux-persist/lib/storage";
 import { combineReducers } from "@reduxjs/toolkit";
+import storage from "redux-persist/lib/storage";
+import { persistReducer } from "redux-persist";
 
-import authSlice from "../pages/SignIn/redusers";
-import pokemonsSlice from "../pages/ShopBox/redusers";
+import authSlice from "../pages/SignIn/reducers";
+import pokemonsSlice from "../pages/Shop/reducers";
+import productDetailsSlice from "../pages/PokemonDetails/reducers";
 
 const authPersistConfig = {
   key: "auth",
@@ -14,4 +15,5 @@ const authPersistConfig = {
 export const rootReducer = combineReducers({
   auth: persistReducer(authPersistConfig, authSlice),
   pokemons: pokemonsSlice,
+  productDetails: productDetailsSlice,
 });

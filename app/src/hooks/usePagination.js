@@ -1,17 +1,11 @@
-import { useCallback, useEffect } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useCallback, useState } from "react";
 
-export const usePagination = (initialPage = 1) => {
-  // const [page, setPage] = useState(initialPage);
-  const [searchParams, setSearchParams] = useSearchParams();
+export const usePagination = (initialPage) => {
+  const [page, setPage] = useState(initialPage);
 
   const handlePageChange = useCallback((_, page) => {
-    setSearchParams(page);
+    setPage(page);
   }, []);
 
-  useEffect(() => {
-    handlePageChange(null, initialPage);
-  }, []);
-
-  return [Number(searchParams.get("page")), handlePageChange];
+  return [page, handlePageChange];
 };

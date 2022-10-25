@@ -1,8 +1,14 @@
+import Header from "../Header";
+import Footer from "../Footer";
+
+import styles from "./styles.module.scss";
+
 const MainLayout = ({ children }) => {
   return (
-    <div>
+    <div className={styles.wrapper}>
       <Header />
-      {children}
+      <div className={styles.content}>{children}</div>
+      <Footer />
     </div>
   );
 };

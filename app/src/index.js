@@ -1,21 +1,29 @@
-import React from "react";
+import React, { StrictMode } from "react";
 import ReactDOM from "react-dom/client";
 import { Provider } from "react-redux";
-import { BrowserRouter } from "react-router-dom";
-
-import Router from "./router/Routes";
+import { HashRouter } from "react-router-dom";
 
 import "./index.css";
 import { store } from "./store/configureStore";
+import { PersistGate } from "redux-persist/integration/react";
+import { persistStore } from "redux-persist";
+import MainLayout from "./components/Layouts";
+import Router from "./routes/Router";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
+const persistor = persistStore(store);
+
 root.render(
-  <React.StrictMode>
-    <BrowserRouter>
+  <StrictMode>
+    <HashRouter>
       <Provider store={store}>
-        <Router exact path="/" />
+        <PersistGate loading={null} persistor={persistor}>
+          <MainLayout>
+            <Router exact path="/" />
+          </MainLayout>
+        </PersistGate>
       </Provider>
-    </BrowserRouter>
-  </React.StrictMode>
+    </HashRouter>
+  </StrictMode>
 );

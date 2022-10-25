@@ -1,19 +1,18 @@
-import React from "react";
-import {Link} from "react-router-dom";
-import {capitalize, startCase} from "lodash";
+import { memo } from "react";
+import { useSelector } from "react-redux";
+import { isAuthSelector } from "../../selectors";
 
-import {ROUTE_NAMES} from "../../router/routeNames";
+import styles from "./styles.module.scss";
+import ButtonAppBar from "../AppBar";
 
-const Header = {
-    return(
-        <div>
-            {
-                Object.entries(ROUTE_NAMES).map(([pageName, path]) => {
-                    <Link className={styles.menuItem} key={path} to={path}>{startCase(capitalize(pageName))}</Link>
-                })
-            }
-        </div>
-    )
-}
+const Header = () => {
+  const isAuth = useSelector(isAuthSelector);
 
-export default Header;
+  return (
+    <div className={styles.wrapper}>
+      <ButtonAppBar />
+    </div>
+  );
+};
+
+export default memo(Header);
