@@ -1,0 +1,18 @@
+{
+  "files": {
+    "main.css": "/store/static/css/main.0bfba4ef.css",
+    "main.js": "/store/static/js/main.aaabd276.js",
+    "static/media/itemOne.png": "/store/static/media/itemOne.c9933d62fa4b70660896.png",
+    "static/media/gifik.gif": "/store/static/media/gifik.4e85794191ad98b50587.gif",
+    "static/media/itemTree.jpg": "/store/static/media/itemTree.8f9d913f28cfb8f7b8cf.jpg",
+    "static/media/logoPokemon.png": "/store/static/media/logoPokemon.62f719d3ed9ef601ca1d.png",
+    "static/media/itemTwo.jpg": "/store/static/media/itemTwo.d54e4f8a73d15ca92ea1.jpg",
+    "index.html": "/store/index.html",
+    "main.0bfba4ef.css.map": "/store/static/css/main.0bfba4ef.css.map",
+    "main.aaabd276.js.map": "/store/static/js/main.aaabd276.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.0bfba4ef.css",
+    "static/js/main.aaabd276.js"
+  ]
+}
