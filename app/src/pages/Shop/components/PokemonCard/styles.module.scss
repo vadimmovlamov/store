@@ -1,0 +1,23 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  cursor: pointer;
+  box-shadow: 15px 15px 20px rgba(210, 204, 204, 0.8);
+  padding: 10px;
+}
+
+.name {
+  font-size: 24px;
+  margin-bottom: 10px;
+  color: #1976d2;
+}
+
+.price {
+  font-size: 18px;
+  font-weight: bold;
+  color: #1976d2;
+}
+
+

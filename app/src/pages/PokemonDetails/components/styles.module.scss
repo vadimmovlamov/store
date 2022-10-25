@@ -1,0 +1,97 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.header_wrapper {
+  display: flex;
+  justify-content: space-between;
+  font-weight: bold;
+  font-size: 30px;
+  margin: 20px;
+}
+
+.line {
+  border: 0.5px solid rgba(169, 169, 169, 0.36);
+}
+
+.container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  align-items: center;
+}
+
+.image_container {
+  text-align: center;
+}
+
+.image_products {
+  width: 50%;
+}
+
+.statsContainer, .abilities_container {
+  margin-top: 20px;
+}
+
+.title_stats, .subtitle_abilities {
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.stats {
+  font-size: 24px;
+  width: 350px;
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 0.5px solid rgba(169, 169, 169, 0.36);
+}
+
+.stat_value {
+  font-weight: bold;
+}
+
+.price_box {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  align-items: center;
+  border-left: green 3px solid;
+  margin-top: 30px;
+  padding: 15px 0;
+  border-bottom: 0.5px solid rgba(169, 169, 169, 0.36);
+  border-top: 0.5px solid rgba(169, 169, 169, 0.36);
+  border-right: 0.5px solid rgba(169, 169, 169, 0.36);
+
+}
+
+.buy_container {
+  display: flex;
+  flex-flow: column wrap;
+  align-content: space-between;
+}
+
+.buy_button {
+  margin-bottom: 50px;
+}
+
+.price {
+  font-size: 24px;
+  font-weight: bold;
+  color: green;
+  margin-left: 15px;
+}
+
+.abilities_container {
+  max-width: 50%;
+  margin-bottom: 20px;
+}
+
+.ability {
+  font-size: 22px;
+  line-height: 1.5;
+}
+
+.link {
+  margin: 15px 0;
+}
