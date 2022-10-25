@@ -25,8 +25,13 @@ export default function LabelBottomNavigation() {
       <BottomNavigationAction
         label="Recents"
         value="recents"
-        icon={<RestoreIcon style={{ color: "white" }} />}
+        icon={
+          <Link to={ROUTE_NAMES.HOME}>
+            <RestoreIcon style={{ color: "white" }} />
+          </Link>
+        }
       />
+
       <BottomNavigationAction
         label="Favorites"
         value="favorites"
